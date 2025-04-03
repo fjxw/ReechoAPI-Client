@@ -1,0 +1,37 @@
+
+services:
+  reecho:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+    container_name: reecho_webapi
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    container_name: db_postgresql
+    restart: always
+
+  client:
+    build:
+      context: ./Client
+      dockerfile: ./Dockerfile
+    ports:
+      - 6786:6000
+    container_name: client_reecho
+    depends_on:
+      - reecho
+    restart: on-failure
+
+volumes:
+  db_data:
