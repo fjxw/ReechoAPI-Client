@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Reecho.Data;
 using Reecho.Services;
 
@@ -26,9 +25,12 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<PostgreeDbContext>();
-builder.Services.AddScoped<IVynilRepository, VynilRepository>();
+builder.Services.AddScoped<IVynilRepository, ProxyRepository>();
+builder.Services.AddTransient<VynilRepository>();
 builder.Services.AddScoped<ISerializerService, SerializerService>();
 builder.Services.AddAsyncInitializer<DbInit>();
+builder.Services.AddMemoryCache();
+
 
 var app = builder.Build();
 

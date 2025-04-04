@@ -13,7 +13,7 @@ import RegisterPage from "@/pages/register-page.tsx";
 function App() {
     const [data, setData] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/api/vynils/all")
+        fetch("http://reecho_webapi:5000/api/vynils/all")
             .then((res) => res.json())
             .then((data) => setData(data));
     }, []);

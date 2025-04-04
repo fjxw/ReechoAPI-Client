@@ -9,7 +9,7 @@ import {Label} from "@/components/ui/label.tsx";
 
 
 export const Vynil = (props : any) => {
-    const url = "http://localhost:5000"
+    const url = "http://reecho_webapi:5000"
     return (
         <Card className="w-[320px] flex flex-col">
             <CardHeader>

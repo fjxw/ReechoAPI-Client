@@ -1,15 +1,26 @@
 {
+    "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Docker Node.js Launch",
-            "type": "docker",
-            "request": "launch",
-            "preLaunchTask": "docker-run: debug",
-            "platform": "node",
-            "node": {
-                "package": "${workspaceFolder}/Reecho/Client/package.json",
-                "localRoot": "${workspaceFolder}/Reecho/Client"
-            }
+      {
+        "name": "Docker: Attach to .NET Core",
+        "type": "coreclr",
+        "request": "attach",
+        "processId": "${command:pickRemoteProcess}",
+        "pipeTransport": {
+          "pipeProgram": "docker",
+          "pipeArgs": [
+            "exec",
+            "-i",
+            "reecho_webapi_debug"  
+          ],
+          "debuggerPath": "/root/.vsdbg/vsdbg",
+          "pipeCwd": "${workspaceFolder}",
+          "quoteArgs": false
+        },
+        "sourceFileMap": {
+          "/app": "${workspaceFolder}" 
         }
+      }
     ]
-}
+  }
+  
